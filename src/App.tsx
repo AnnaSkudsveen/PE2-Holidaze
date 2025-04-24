@@ -1,7 +1,26 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import Home from "./pages/Home";
+import AllVenues from "./pages/Venues";
+import Venue from "./pages/VenueDetail";
+import DashboardUser from "./pages/dashboard/User";
+import DashboardManager from "./pages/dashboard/Manager";
+import Layout from "./layout/Layout";
 
 function App() {
-  return <div></div>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/Venue/:id" element={<Venue />} />
+          <Route path="/Venues" element={<AllVenues />} />
+          <Route path="/DashboardManager" element={<DashboardManager />} />
+          <Route path="/DashboardUser" element={<DashboardUser />} />
+        </Route>
+      </Routes>
+    </>
+  );
 }
 
 export default App;
