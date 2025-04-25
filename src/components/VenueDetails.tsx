@@ -24,7 +24,7 @@ function DiplayVenues() {
 
     fetchVenues();
   }, []);
-  if (venues.length === 0) return <div>No venues listed</div>;
+  if (venues.length === 0) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
