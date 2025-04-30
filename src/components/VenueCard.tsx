@@ -10,7 +10,13 @@ function VenueCard({ venue }: IVenueCardProps) {
   let venueName;
 
   if (venue.media.length > 0) {
-    imageContent = <img src={venue.media[0].url} alt={venue.media[0].alt} />;
+    imageContent = (
+      <img
+        src={venue.media[0].url}
+        alt={venue.media[0].alt}
+        className="w-[262px] h-[169px] object-cover"
+      />
+    );
   } else {
     imageContent = <div>No image available</div>;
   }
@@ -24,11 +30,11 @@ function VenueCard({ venue }: IVenueCardProps) {
   return (
     <Link
       to={`/venue/${venue.id}`}
-      className="venue-card w-[274px]"
+      className="venue-card w-[262px] h-[210px] flex flex-col items-center"
       key={venue.id}
     >
       {imageContent}
-      <div className="flex justify-between">
+      <div className="flex justify-between w-full">
         <div className="flex flex-col items-start">
           <p className="h-3">{venueName}</p>
           <p>Location: {venue.location.country}</p>

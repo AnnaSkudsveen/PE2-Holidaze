@@ -28,9 +28,9 @@ function DiplayVenues() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
+    <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
       {venues.map((venue) => (
-        <VenueCard venue={venue} />
+        <VenueCard venue={venue} key={venue.id} />
       ))}
     </div>
   );
