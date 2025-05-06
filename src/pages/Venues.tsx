@@ -1,14 +1,16 @@
-import DiplayVenues from "../components/DisplayVenues";
+
+import DiplayVenues from "../components/VenueDetails";
+import SearchBar from "../components/search";
+
 
 function AllVenues() {
   console.log("All Venues");
   return (
     <>
       <section>
-        <form action="">
-          <input type="text" placeholder="Search" />
-          <button>Search</button>
-        </form>
+
+        <SearchBar />
+
       </section>
       <section>
         <DiplayVenues />
