@@ -6,7 +6,9 @@ function Navbar() {
     <header>
       <nav>
         <p>HOLIDAZE</p>
+
         <SearchBar />
+
         <NavLink to="/">Home</NavLink>
         <NavLink to="/Venues">All Venues</NavLink>
         <NavLink to="/DashboardManager">Dashboard Manager</NavLink>
