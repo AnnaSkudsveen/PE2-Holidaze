@@ -6,6 +6,7 @@ import Venue from "./pages/VenueDetail";
 import DashboardUser from "./pages/dashboard/User";
 import DashboardManager from "./pages/dashboard/Manager";
 import Layout from "./layout/Layout";
+import Login from "./pages/auth/login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Venues" element={<AllVenues />} />
           <Route path="/DashboardManager" element={<DashboardManager />} />
           <Route path="/DashboardUser" element={<DashboardUser />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </>
