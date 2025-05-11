@@ -12,11 +12,12 @@ function VenueDetail() {
         const response = await fetch(url);
         const json = await response.json();
         setVenue(json.data as Venue);
+        console.log(json.data);
       } catch (error) {
         console.error("Error: ", error);
       }
     }
-    getVenue(`https://v2.api.noroff.dev/holidaze/venues/${id}`);
+    getVenue(`https://v2.api.noroff.dev/holidaze/venues/${id}?_bookings=true`);
   }, [id]);
 
   if (!venue) {
