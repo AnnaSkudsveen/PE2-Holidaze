@@ -27,6 +27,7 @@ function Login() {
 
       const data = await response.json();
       const { accessToken, venueManager } = data.data;
+
       localStorage.setItem("bearerToken", accessToken);
 
       if (venueManager) {
