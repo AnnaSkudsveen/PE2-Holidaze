@@ -7,6 +7,7 @@ import DashboardUser from "./pages/dashboard/User";
 import DashboardManager from "./pages/dashboard/Manager";
 import Layout from "./layout/Layout";
 import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path="/Venues" element={<AllVenues />} />
           <Route path="/DashboardManager" element={<DashboardManager />} />
           <Route path="/DashboardUser" element={<DashboardUser />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
         </Route>
       </Routes>
     </>

@@ -14,6 +14,7 @@ function Navbar() {
         <NavLink to="/DashboardManager">Dashboard Manager</NavLink>
         <NavLink to="/DashboardUser">Dashboard User</NavLink>
         <NavLink to="/Login">Log In</NavLink>
+        <NavLink to="/Register">Register</NavLink>
       </nav>
     </header>
   );
