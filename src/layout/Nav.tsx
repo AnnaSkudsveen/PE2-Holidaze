@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import SearchBar from "../components/search";
+import handleLogout from "../pages/auth/logout";
 
 function Navbar() {
   return (
@@ -15,6 +16,7 @@ function Navbar() {
         <NavLink to="/DashboardUser">Dashboard User</NavLink>
         <NavLink to="/Login">Log In</NavLink>
         <NavLink to="/Register">Register</NavLink>
+        <button onClick={handleLogout}>Logout</button>
       </nav>
     </header>
   );
