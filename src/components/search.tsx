@@ -39,6 +39,7 @@ function SearchBar() {
       />
       <button>Search</button>
       {loading && <p>Loading...</p>}
+      {filteredSuggestions.length === 0 && <p>No restults avaliable</p>}
       {search && filteredSuggestions.length > 0 && (
         <div>
           {filteredSuggestions.map((venue) => (
