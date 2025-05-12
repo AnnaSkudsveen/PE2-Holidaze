@@ -69,10 +69,37 @@ function VenueDetail() {
       </div>
       <div>
         <h2>Booking</h2>
-        <div>Dates</div>
-        <div>People</div>
-        <div>Pricing</div>
-        <button>Book venue</button>
+        <form action="">
+          <div>
+            <h3>Dates</h3>
+            <label htmlFor="">From</label>
+            <input type="date" id="dateFrom" name="dateFrom" />
+            <label htmlFor="">To</label>
+            <input type="date" id="dateTo" name="dateTo" />
+          </div>
+
+          <div>
+            <h3>Guests</h3>
+            <label htmlFor="guests">Guests</label>
+            <select name="guests" id="guests">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div>
+            <h3>Price</h3>
+            <p>{venue.price}</p>
+          </div>
+          <button>Book venue</button>
+        </form>
       </div>
     </>
   );
