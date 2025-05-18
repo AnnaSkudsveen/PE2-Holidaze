@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { API_BASE_URL, ENDPOINTS } from "../../constants/api";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -26,9 +26,12 @@ function Login() {
       }
 
       const data = await response.json();
-      const { accessToken, venueManager } = data.data;
+      const { accessToken, venueManager, name } = data.data;
 
       localStorage.setItem("bearerToken", accessToken);
+      localStorage.setItem("name", name);
+
+      console.log(name);
 
       if (venueManager) {
         navigate("/DashboardManager");
