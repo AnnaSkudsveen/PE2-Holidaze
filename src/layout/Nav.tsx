@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import SearchBar from "../components/search";
-import handleLogout from "../pages/auth/logout";
+import SearchBar from "../components/Search";
+import handleLogout from "../components/logout";
 
 function Navbar() {
   return (
