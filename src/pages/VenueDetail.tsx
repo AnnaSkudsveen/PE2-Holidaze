@@ -27,8 +27,8 @@ function VenueDetail() {
     return <div>Loading venue details...</div>;
   }
 
-  const handleBookingSuccess = () => {
-    navigate("/dashboardUser");
+  const handleBookingSuccess = (bookingId: string) => {
+    navigate(`/BookingSuccess/${bookingId}`);
   };
 
   console.log("Venue in detail");

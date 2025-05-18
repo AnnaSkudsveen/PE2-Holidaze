@@ -3,7 +3,7 @@ import React, { useState } from "react";
 interface BookingFormProps {
   venueId: string;
   maxGuests: number;
-  onBookingSuccess: () => void;
+  onBookingSuccess: (bookingId: string) => void;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({
@@ -15,6 +15,10 @@ const BookingForm: React.FC<BookingFormProps> = ({
   const [dateTo, setDateTo] = useState("");
   const [guests, setGuests] = useState(1);
   const apiKey = import.meta.env.VITE_X_NOROFF_API_KEY;
+  if (!apiKey) {
+    console.log("API key is not defined.");
+    return;
+  }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -50,14 +54,16 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
       if (!response.ok) {
         const errorData = await response.json();
+        alert(`Error: ${errorData.errors[0]?.message}`);
         console.log(`Error: ${errorData.errors[0]?.message}`);
         return;
       }
 
       const data = await response.json();
       console.log("Booking confirmed:", data.data);
-      onBookingSuccess();
+      onBookingSuccess(data.data.id);
     } catch (error) {
+      alert(error);
       console.error("Booking-error:", error);
     }
   };
