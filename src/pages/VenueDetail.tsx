@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Venue from "../types/Venue";
-import BookingForm from "../components/BookingForm";
+import BookingForm from "./dashboard/booking/BookingForm";
 import { useNavigate } from "react-router-dom";
 
 function VenueDetail() {

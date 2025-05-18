@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import Venue from "../types/Venue";
-import { Booking } from "../types/Bookings";
+import { Booking } from "../../../types/Bookings";
+import BookingCard from "../../../components/BookingCard";
 
 function BookingSuccess() {
   const { id } = useParams<{ id: string }>();
@@ -51,13 +52,7 @@ function BookingSuccess() {
   return (
     <>
       <h1>Booking Confirmed!</h1>
-      <p>Booking ID: {booking.id}</p>
-      <p>Guests: {booking.guests}</p>
-      <p>Venue: {booking.venue?.name}</p>
-      <p>City: {booking.venue?.location?.city}</p>
-      <p>Guests: {booking.guests}</p>
-      <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
-      <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
+      <BookingCard booking={booking} />
     </>
   );
 }
