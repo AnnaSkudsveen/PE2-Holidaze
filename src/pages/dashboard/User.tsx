@@ -39,6 +39,41 @@ function DashboardUser() {
     fetchBookings();
   }, [name, token, apiKey]);
 
+  async function handleDeleteBooking(id: string) {
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this booking?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `https://v2.api.noroff.dev/holidaze/bookings/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "X-Noroff-API-Key": apiKey
+          }
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        alert(errorData?.errors?.[0]?.message || "Failed to delete booking.");
+        return;
+      }
+
+      setBookings((prevBookings) =>
+        prevBookings.filter((booking) => booking.id !== id)
+      );
+      alert("Booking deleted successfully.");
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("An error occurred while deleting the booking.");
+    }
+  }
+
   if (!apiKey || !token) {
     console.log("API key or token is not defined.");
     return;
@@ -53,9 +88,12 @@ function DashboardUser() {
   return (
     <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
       {bookings.map((booking) => (
-        <div>
-          <BookingCard booking={booking} key={booking.id} />
+        <div key={booking.id}>
+          <BookingCard booking={booking} />
           <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
+          <button onClick={() => handleDeleteBooking(booking.id)}>
+            Delete Booking
+          </button>
         </div>
       ))}
     </div>

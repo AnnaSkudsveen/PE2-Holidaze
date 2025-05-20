@@ -1,71 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Booking } from "../../../types/Bookings";
 
 interface BookingFormProps {
-  venueId: string;
+  venueId?: string;
   maxGuests: number;
-  onBookingSuccess: (bookingId: string) => void;
+  initialData?: Booking;
+  submitButtonText?: string;
+  onSubmit: (formData: {
+    dateFrom: string;
+    dateTo: string;
+    guests: number;
+  }) => void;
+  onBookingSuccess?: (bookingId: string) => void;
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({
-  venueId,
+const BookingForm = ({
   maxGuests,
-  onBookingSuccess
-}) => {
+  initialData,
+  submitButtonText = "Book",
+  onSubmit
+}: BookingFormProps) => {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [guests, setGuests] = useState(1);
-  const apiKey = import.meta.env.VITE_X_NOROFF_API_KEY;
-  if (!apiKey) {
-    console.log("API key is not defined.");
-    return;
-  }
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const token = localStorage.getItem("bearerToken");
-
-    if (!token) {
-      alert("You need to be logged in to make a booking.");
-      return;
+  useEffect(() => {
+    if (initialData) {
+      setDateFrom(initialData.dateFrom.slice(0, 10));
+      setDateTo(initialData.dateTo.slice(0, 10));
+      setGuests(initialData.guests);
     }
+  }, [initialData]);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
     const dateFromISO = new Date(dateFrom).toISOString();
     const dateToISO = new Date(dateTo).toISOString();
 
-    try {
-      const response = await fetch(
-        "https://v2.api.noroff.dev/holidaze/bookings",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": `${apiKey}`
-          },
-          body: JSON.stringify({
-            dateFrom: dateFromISO,
-            dateTo: dateToISO,
-            guests,
-            venueId
-          })
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.errors[0]?.message}`);
-        console.log(`Error: ${errorData.errors[0]?.message}`);
-        return;
-      }
-
-      const data = await response.json();
-      console.log("Booking confirmed:", data.data);
-      onBookingSuccess(data.data.id);
-    } catch (error) {
-      alert(error);
-      console.error("Booking-error:", error);
-    }
+    onSubmit({
+      dateFrom: dateFromISO,
+      dateTo: dateToISO,
+      guests
+    });
   };
 
   return (
@@ -75,12 +52,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <input
           type="date"
           id="dateFrom"
-          name="dateFrom"
           value={dateFrom}
-          onChange={(event) => {
-            setDateFrom(event.target.value);
-            console.log(dateFrom);
-          }}
+          onChange={(e) => setDateFrom(e.target.value)}
           required
         />
       </div>
@@ -89,12 +62,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <input
           type="date"
           id="dateTo"
-          name="dateTo"
           value={dateTo}
-          onChange={(event) => {
-            setDateTo(event.target.value);
-            console.log(dateFrom);
-          }}
+          onChange={(e) => setDateTo(e.target.value)}
           required
         />
       </div>
@@ -102,19 +71,17 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <label htmlFor="guests">Guests:</label>
         <select
           id="guests"
-          name="guests"
           value={guests}
-          onChange={(event) => setGuests(Number(event.target.value))}
-          required
+          onChange={(e) => setGuests(Number(e.target.value))}
         >
-          {Array.from({ length: maxGuests }, (_, index) => (
-            <option key={index + 1} value={index + 1}>
-              {index + 1}
+          {Array.from({ length: maxGuests }, (_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
             </option>
           ))}
         </select>
       </div>
-      <button type="submit">Book</button>
+      <button type="submit">{submitButtonText}</button>
     </form>
   );
 };
