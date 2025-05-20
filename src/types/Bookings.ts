@@ -32,8 +32,6 @@ export type Booking = {
       zip: string;
       country: string;
       continent: string;
-      lat: number;
-      lng: number;
     };
   };
 };
