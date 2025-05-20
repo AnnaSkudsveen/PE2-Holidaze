@@ -134,17 +134,61 @@ function VenueForm({
         />
       </label>
 
-      <label>
-        Rating
-        <input
-          name="rating"
-          type="number"
-          value={venueData.rating}
-          onChange={handleChange}
-          min={0}
-          max={5}
-        />
-      </label>
+      <div>
+        <label>Rating</label>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="rating"
+              value={1}
+              checked={venueData.rating === 1}
+              onChange={handleChange}
+            />
+            1
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="rating"
+              value={2}
+              checked={venueData.rating === 2}
+              onChange={handleChange}
+            />
+            2
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="rating"
+              value={3}
+              checked={venueData.rating === 3}
+              onChange={handleChange}
+            />
+            3
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="rating"
+              value={4}
+              checked={venueData.rating === 4}
+              onChange={handleChange}
+            />
+            4
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="rating"
+              value={5}
+              checked={venueData.rating === 5}
+              onChange={handleChange}
+            />
+            5
+          </label>
+        </div>
+      </div>
 
       <div>
         <h3>Extras</h3>

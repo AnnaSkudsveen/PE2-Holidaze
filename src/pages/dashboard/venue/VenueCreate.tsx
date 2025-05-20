@@ -34,7 +34,7 @@ function VenueCreate() {
       }
 
       console.log("Venue created:", data.data);
-      navigate(`/venues/${data.data.id}`);
+      navigate(`/venue/${data.data.id}`);
     } catch (error) {
       console.error("Error creating venue:", error);
     }
