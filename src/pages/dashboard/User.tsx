@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import BookingCard from "../../components/BookingCard";
 import { Booking } from "../../types/Bookings";
 // import Venue from "../../types/Venue";
@@ -52,7 +53,10 @@ function DashboardUser() {
   return (
     <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
       {bookings.map((booking) => (
-        <BookingCard booking={booking} key={booking.id} />
+        <div>
+          <BookingCard booking={booking} key={booking.id} />
+          <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
+        </div>
       ))}
     </div>
   );

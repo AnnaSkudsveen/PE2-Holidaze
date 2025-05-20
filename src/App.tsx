@@ -9,7 +9,7 @@ import Layout from "./layout/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import BookingSuccess from "./pages/dashboard/booking/BookingSuccess";
-import VenueCreate from "./pages/dashboard/venue/create";
+import VenueCreate from "./pages/dashboard/venue/VenueCreate";
 import VenueEdit from "./pages/dashboard/venue/VenueEdit";
 import BookingEdit from "./pages/dashboard/booking/BookingEdit";
 
