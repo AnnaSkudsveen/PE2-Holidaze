@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import Venue from "../types/Venue";
-import { Booking } from "../types/Bookings";
-import BookingCard from "../components/BookingCard";
+import { Booking } from "../../../types/Bookings";
+import BookingCard from "../../../components/BookingCard";
 
 function BookingSuccess() {
   const { id } = useParams<{ id: string }>();
