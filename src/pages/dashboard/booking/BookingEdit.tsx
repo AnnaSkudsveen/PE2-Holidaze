@@ -6,6 +6,9 @@ import { Booking } from "../../../types/Bookings";
 function BookingEdit() {
   const { id } = useParams<{ id: string }>();
   const [booking, setBooking] = useState<Booking | null>(null);
+  const [venueBookings, setVenueBookings] = useState<
+    { id: string; dateFrom: string; dateTo: string }[]
+  >([]);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("bearerToken");
@@ -34,6 +37,30 @@ function BookingEdit() {
 
     if (id) fetchBooking();
   }, [id, apiKey, token]);
+
+  useEffect(() => {
+    if (!booking?.venue?.id) return;
+
+    async function fetchVenueBookings() {
+      try {
+        const res = await fetch(
+          `https://v2.api.noroff.dev/holidaze/venues/${booking?.venue.id}?_bookings=true`
+        );
+        const data = await res.json();
+
+        const filtered =
+          data.data.bookings?.filter(
+            (b: { id: string }) => b.id !== booking?.id
+          ) ?? [];
+
+        setVenueBookings(filtered);
+      } catch (error) {
+        console.error("Error fetching venue bookings:", error);
+      }
+    }
+
+    fetchVenueBookings();
+  }, [booking]);
 
   const handleUpdate = async ({
     dateFrom,
@@ -88,6 +115,7 @@ function BookingEdit() {
       initialData={booking}
       onSubmit={handleUpdate}
       submitButtonText="Update Booking"
+      bookedDates={venueBookings}
     />
   );
 }

@@ -123,6 +123,7 @@ function VenueDetail() {
           maxGuests={venue.maxGuests}
           onSubmit={handleBookingSubmit}
           onBookingSuccess={handleBookingSuccess}
+          bookedDates={venue.bookings}
         />
       </div>
     </>
