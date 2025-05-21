@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BookingCard from "../../components/BookingCard";
 import { Booking } from "../../types/Bookings";
-// import Venue from "../../types/Venue";
+import Profile from "../Profile";
+import {
+  fetchUserBookings,
+  deleteBooking
+} from "../../components/FetchBookings";
 
 function DashboardUser() {
   console.log("Dashboard User");
@@ -13,30 +17,11 @@ function DashboardUser() {
   const token = localStorage.getItem("bearerToken");
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/profiles/${name}/bookings?_venue=true`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
-              "X-Noroff-API-Key": `${apiKey}`
-            }
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch bookings");
-        }
-        const json = await response.json();
-        setBookings(json.data);
-      } catch (error) {
-        setError((error as Error).message);
-      }
-    };
+    if (!name || !token || !apiKey) return;
 
-    fetchBookings();
+    fetchUserBookings(name, token, apiKey)
+      .then(setBookings)
+      .catch((err) => setError(err.message));
   }, [name, token, apiKey]);
 
   async function handleDeleteBooking(id: string) {
@@ -46,31 +31,12 @@ function DashboardUser() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/bookings/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          }
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        alert(errorData?.errors?.[0]?.message || "Failed to delete booking.");
-        return;
-      }
-
-      setBookings((prevBookings) =>
-        prevBookings.filter((booking) => booking.id !== id)
-      );
+      await deleteBooking(id, token!, apiKey!);
+      setBookings((prev) => prev.filter((b) => b.id !== id));
       alert("Booking deleted successfully.");
-    } catch (error) {
-      console.error("Delete error:", error);
-      alert("An error occurred while deleting the booking.");
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert((err as Error).message);
     }
   }
 
@@ -86,17 +52,21 @@ function DashboardUser() {
   if (error) return <h2>{error}</h2>;
 
   return (
-    <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
-      {bookings.map((booking) => (
-        <div key={booking.id}>
-          <BookingCard booking={booking} />
-          <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
-          <button onClick={() => handleDeleteBooking(booking.id)}>
-            Delete Booking
-          </button>
-        </div>
-      ))}
-    </div>
+    <>
+      <h1>Dashboard</h1>
+      <Profile />
+      <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
+        {bookings.map((booking) => (
+          <div key={booking.id}>
+            <BookingCard booking={booking} />
+            <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
+            <button onClick={() => handleDeleteBooking(booking.id)}>
+              Delete Booking
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
