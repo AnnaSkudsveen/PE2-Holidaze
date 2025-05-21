@@ -35,6 +35,7 @@ function Login() {
 
       if (venueManager) {
         navigate("/DashboardManager");
+        localStorage.setItem("venueManager", "true");
       } else {
         navigate("/DashboardUser");
       }
