@@ -39,6 +39,25 @@ export type Venue = {
       alt: string;
     };
   };
+  bookings: [
+    {
+      id: string;
+      dateFrom: string;
+      dateTo: string;
+      guests: number;
+      created: string;
+      updated: string;
+      customer: {
+        name: string;
+        email: string;
+        bio: string;
+        avatar: {
+          url: string;
+          alt: string;
+        };
+      };
+    }
+  ];
 };
 
 export default Venue;
