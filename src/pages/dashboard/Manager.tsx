@@ -2,9 +2,17 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import VenueCard from "../../components/VenueCard";
 import Venue from "../../types/Venue";
+import Profile from "../Profile";
+import BookingCard from "../../components/BookingCard";
+import {
+  fetchUserBookings,
+  deleteBooking
+} from "../../components/FetchBookings";
+import { Booking } from "../../types/Bookings";
 
 function DashboardManager() {
   const [venues, setVenues] = useState<Venue[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
   const token = localStorage.getItem("bearerToken");
   const apiKey = import.meta.env.VITE_X_NOROFF_API_KEY;
@@ -46,6 +54,14 @@ function DashboardManager() {
     }
   }, [profileName, token, apiKey]);
 
+  useEffect(() => {
+    if (!profileName || !token || !apiKey) return;
+
+    fetchUserBookings(profileName, token, apiKey)
+      .then(setBookings)
+      .catch((error) => alert(error.message));
+  }, [profileName, token, apiKey]);
+
   async function handleDelete(id: string) {
     const confirmDelete = confirm(
       "Are you sure you want to delete this venue?"
@@ -79,9 +95,25 @@ function DashboardManager() {
     }
   }
 
+  async function handleDeleteBooking(id: string) {
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this booking?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteBooking(id, token!, apiKey!);
+      setBookings((prev) => prev.filter((b) => b.id !== id));
+      alert("Booking deleted successfully.");
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert((err as Error).message);
+    }
+  }
+
   return (
     <>
-      <h1>Dashboard Manager</h1>
+      <Profile />
 
       <div>
         <Link to="/VenueCreate">
@@ -98,6 +130,17 @@ function DashboardManager() {
           </div>
         ))}
       </section>
+      <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
+        {bookings.map((booking) => (
+          <div key={booking.id}>
+            <BookingCard booking={booking} />
+            <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
+            <button onClick={() => handleDeleteBooking(booking.id)}>
+              Delete Booking
+            </button>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
