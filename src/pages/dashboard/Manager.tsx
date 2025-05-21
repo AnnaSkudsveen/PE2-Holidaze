@@ -22,7 +22,7 @@ function DashboardManager() {
     async function fetchVenues() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/profiles/${profileName}/venues`,
+          `https://v2.api.noroff.dev/holidaze/profiles/${profileName}/venues?_bookings=true`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -125,6 +125,25 @@ function DashboardManager() {
         {venues.map((venue) => (
           <div key={venue.id}>
             <VenueCard venue={venue} />
+            {venue.bookings?.slice(0, 3).map((booking, index) => (
+              <div key={booking.id || index}>
+                <p>
+                  {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                  })}{" "}
+                  –{" "}
+                  {new Date(booking.dateTo).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                  })}
+                </p>
+                <p>Customer: {booking.customer.name}</p>
+                <p>Guests: {booking.guests}</p>
+              </div>
+            ))}
             <Link to={`/VenueEdit/${venue.id}`}>Edit Venue</Link>
             <button onClick={() => handleDelete(venue.id)}>Delete Venue</button>
           </div>
