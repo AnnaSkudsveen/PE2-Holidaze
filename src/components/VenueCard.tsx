@@ -37,7 +37,11 @@ function VenueCard({ venue }: IVenueCardProps) {
       <div className="flex justify-between w-full">
         <div className="flex flex-col items-start">
           <p className="h-3">{venueName}</p>
-          <p>Location: {venue.location.country}</p>
+          <p>
+            {venue.location.country?.length > 20
+              ? venue.location.country.slice(0, 20) + "..."
+              : ""}
+          </p>
         </div>
         <div className="flex flex-col items-end">
           <p className="h-3">{venue.price}kr </p>

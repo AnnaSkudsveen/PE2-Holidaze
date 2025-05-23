@@ -115,51 +115,57 @@ function DashboardManager() {
     <>
       <Profile />
 
-      <div>
-        <Link to="/VenueCreate">
-          <h2>Create new venue</h2>
-        </Link>
-      </div>
+      <section className="flex gap-20 justify-center ">
+        <div>
+          <div>
+            <Link to="/VenueCreate">
+              <h2>Create new venue</h2>
+            </Link>
+          </div>
+          {venues.map((venue) => (
+            <div key={venue.id}>
+              <VenueCard venue={venue} />
+              <h3>Bookings at venue</h3>
+              {venue.bookings?.slice(0, 3).map((booking, index) => (
+                <div key={booking.id || index}>
+                  <p>
+                    {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric"
+                    })}{" "}
+                    –{" "}
+                    {new Date(booking.dateTo).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric"
+                    })}
+                  </p>
 
-      <section>
-        {venues.map((venue) => (
-          <div key={venue.id}>
-            <VenueCard venue={venue} />
-            {venue.bookings?.slice(0, 3).map((booking, index) => (
-              <div key={booking.id || index}>
-                <p>
-                  {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                  })}{" "}
-                  –{" "}
-                  {new Date(booking.dateTo).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                  })}
-                </p>
-                <p>Customer: {booking.customer.name}</p>
-                <p>Guests: {booking.guests}</p>
-              </div>
-            ))}
-            <Link to={`/VenueEdit/${venue.id}`}>Edit Venue</Link>
-            <button onClick={() => handleDelete(venue.id)}>Delete Venue</button>
-          </div>
-        ))}
+                  <p>Customer: {booking.customer.name}</p>
+                  <p>Guests: {booking.guests}</p>
+                </div>
+              ))}
+              <Link to={`/VenueEdit/${venue.id}`}>Edit Venue</Link>
+              <button onClick={() => handleDelete(venue.id)}>
+                Delete Venue
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 justify-around w-[262px] gap-4 max-w-[1200px]">
+          <h2>Your bookings</h2>
+          {bookings.map((booking) => (
+            <div key={booking.id}>
+              <BookingCard booking={booking} />
+              <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
+              <button onClick={() => handleDeleteBooking(booking.id)}>
+                Delete Booking
+              </button>
+            </div>
+          ))}
+        </div>
       </section>
-      <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
-        {bookings.map((booking) => (
-          <div key={booking.id}>
-            <BookingCard booking={booking} />
-            <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
-            <button onClick={() => handleDeleteBooking(booking.id)}>
-              Delete Booking
-            </button>
-          </div>
-        ))}
-      </div>
     </>
   );
 }

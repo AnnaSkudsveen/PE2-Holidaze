@@ -10,7 +10,7 @@ function DiplayVenues() {
     const fetchVenues = async () => {
       try {
         const response = await fetch(
-          "https://v2.api.noroff.dev/holidaze/venues"
+          "https://v2.api.noroff.dev/holidaze/venues?sort=created&sortOrder=desc"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch venues");

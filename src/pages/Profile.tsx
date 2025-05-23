@@ -103,9 +103,9 @@ function Profile() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-4">
       {!isEditing ? (
-        <>
+        <section className="flex flex-col items-center justify-center gap-4">
           <img
             src={profile.banner?.url}
             alt={profile.banner?.alt || "Banner"}
@@ -116,14 +116,27 @@ function Profile() {
             alt={profile.avatar?.alt || "Avatar"}
             className="w-[120px] h-[120px] rounded-full object-cover"
           />
-          <h2>Welcome, {profile.name}!</h2>
-          <p>{profile.bio}</p>
-          <p>{profile.venueManager ? "Venue Manager" : "User"}</p>
 
-          <p>Venues: {profile._count.venues}</p>
-          <p>Bookings: {profile._count.bookings}</p>
-          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
-        </>
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="text-3xl">Welcome, {profile.name}!</h2>
+            <p className="text-xs">
+              {profile.venueManager ? "Venue Manager" : "User"}
+            </p>
+            <p>{profile.bio}</p>
+
+            <div className="flex gap-10">
+              <p>Venues: {profile._count.venues}</p>
+              <p>Bookings: {profile._count.bookings}</p>
+            </div>
+
+            <button
+              onClick={() => setIsEditing(true)}
+              className="border rounded py-1 px-3 hover:text-[#508484] mb-4"
+            >
+              Edit Profile
+            </button>
+          </div>
+        </section>
       ) : (
         <form onSubmit={handleSubmit}>
           <div>
