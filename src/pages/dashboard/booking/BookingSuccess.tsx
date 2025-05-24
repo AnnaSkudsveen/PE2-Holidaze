@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Booking } from "../../../types/Bookings";
 import BookingCard from "../../../components/BookingCard";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function BookingSuccess() {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +14,7 @@ function BookingSuccess() {
     async function fetchBooking() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/bookings/${id}?_venue=true`,
+          `${API_BASE_URL}${ENDPOINTS.BOOKINGS}/${id}?_venue=true`,
           {
             headers: {
               "Content-Type": "application/json",

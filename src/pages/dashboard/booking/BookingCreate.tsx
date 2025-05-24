@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookingForm from "./BookingForm";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function BookingCreate() {
   const { venueId } = useParams<{ venueId: string }>();
@@ -20,7 +21,7 @@ function BookingCreate() {
   }) => {
     try {
       const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/bookings/${venueId}`,
+        `${API_BASE_URL}${ENDPOINTS.BOOKINGS}/${venueId}`,
         {
           method: "POST",
           headers: {
@@ -56,9 +57,7 @@ function BookingCreate() {
 
   useEffect(() => {
     async function fetchVenue() {
-      const res = await fetch(
-        `https://v2.api.noroff.dev/holidaze/venues/${venueId}`
-      );
+      const res = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}/${venueId}`);
       const data = await res.json();
       setMaxGuests(data.data.maxGuests);
     }

@@ -34,39 +34,29 @@ function VenueForm({
     }
   );
 
-  function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    const { name, value, type } = event.target;
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value, checked } = event.target;
 
-    if (type === "checkbox") {
-      const checked = (event.target as HTMLInputElement).checked;
-
-      if (name in venueData.meta) {
-        setVenueData({
-          ...venueData,
-          meta: {
-            ...venueData.meta,
-            [name]: checked
-          }
-        });
-      } else if (name in venueData.location) {
-        setVenueData({
-          ...venueData,
-          location: {
-            ...venueData.location,
-            [name]: value
-          }
-        });
-      } else if (
-        name === "price" ||
-        name === "maxGuests" ||
-        name === "rating"
-      ) {
-        setVenueData({ ...venueData, [name]: Number(value) });
-      } else {
-        setVenueData({ ...venueData, [name]: value });
-      }
+    if (name in venueData.meta) {
+      setVenueData({
+        ...venueData,
+        meta: {
+          ...venueData.meta,
+          [name]: checked
+        }
+      });
+    } else if (name in venueData.location) {
+      setVenueData({
+        ...venueData,
+        location: {
+          ...venueData.location,
+          [name]: value
+        }
+      });
+    } else if (name === "price" || name === "maxGuests" || name === "rating") {
+      setVenueData({ ...venueData, [name]: Number(value) });
+    } else {
+      setVenueData({ ...venueData, [name]: value });
     }
   }
 
@@ -104,12 +94,12 @@ function VenueForm({
 
       <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
         <label>Description</label>
-        <textarea
+        <input
           name="description"
           value={venueData.description}
           onChange={handleChange}
           required
-        ></textarea>
+        />
       </div>
 
       <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
@@ -151,58 +141,59 @@ function VenueForm({
       <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
         <label>Rating</label>
         <div className="flex gap-4 justify-around">
-          <label>
+          <div>
+            <label>1</label>
             <input
               type="radio"
               name="rating"
-              value={1}
+              value="1"
               checked={venueData.rating === 1}
               onChange={handleChange}
             />
-            1
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>2</label>
             <input
               type="radio"
               name="rating"
-              value={2}
+              value="2"
               checked={venueData.rating === 2}
               onChange={handleChange}
             />
-            2
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>3</label>
             <input
               type="radio"
               name="rating"
-              value={3}
+              value="3"
               checked={venueData.rating === 3}
               onChange={handleChange}
             />
-            3
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>4</label>
             <input
               type="radio"
               name="rating"
-              value={4}
+              value="4"
               checked={venueData.rating === 4}
               onChange={handleChange}
             />
-            4
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>5</label>
             <input
               type="radio"
               name="rating"
-              value={5}
+              value="5"
               checked={venueData.rating === 5}
               onChange={handleChange}
             />
-            5
-          </label>
+          </div>
         </div>
       </div>
+
       <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
         <h3 className="text-left">Extras</h3>
         <div className="flex  gap-2 w-full max-w-[600px] items-baseline">

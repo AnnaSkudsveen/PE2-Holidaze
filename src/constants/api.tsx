@@ -5,7 +5,5 @@ export const ENDPOINTS = {
   REGISTER: "/auth/register",
   VENUES: "/holidaze/venues",
   BOOKINGS: "/holidaze/bookings",
-  PROFILES: "/holidaze/profiles",
-  PROFILES_BOOKINGS: "/holidaze/profiles/{name}/bookings",
-  PROFILES_VENUES: "/holidaze/profiles/{name}/venues"
+  PROFILES: "/holidaze/profiles"
 };

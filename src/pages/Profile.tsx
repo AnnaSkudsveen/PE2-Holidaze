@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Profile as ProfileType } from "../types/Profile";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function Profile() {
   const [profile, setProfile] = useState<ProfileType | null>(null);
@@ -21,7 +22,7 @@ function Profile() {
 
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/profiles/${name}`,
+          `${API_BASE_URL}${ENDPOINTS.PROFILES}/${name}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -63,7 +64,7 @@ function Profile() {
 
     try {
       const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/profiles/${name}`,
+        `${API_BASE_URL}${ENDPOINTS.PROFILES}/${name}`,
         {
           method: "PUT",
           headers: {

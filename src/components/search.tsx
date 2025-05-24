@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Venue from "../types/Venue";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
@@ -27,7 +28,7 @@ function SearchBar() {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues?search=${delayedSearch}&limit=10`
+          `${API_BASE_URL}${ENDPOINTS.VENUES}?search=${delayedSearch}&limit=10`
         );
         const data = await response.json();
         setSuggestions(data.data || []);

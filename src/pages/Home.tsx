@@ -3,6 +3,7 @@ import HeaderImg from "../../public/header_img.jpg";
 import { useEffect, useState } from "react";
 import VenueCard from "../components/VenueCard";
 import { Link } from "react-router-dom";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function Home() {
   console.log("Homepage");
@@ -12,7 +13,7 @@ function Home() {
     const fetchLatestVenues = async () => {
       try {
         const response = await fetch(
-          "https://v2.api.noroff.dev/holidaze/venues?sort=created&sortOrder=desc&limit=4"
+          `${API_BASE_URL}${ENDPOINTS.VENUES}?sort=created&sortOrder=desc&limit=4`
         );
         const data = await response.json();
         setVenues(data.data);

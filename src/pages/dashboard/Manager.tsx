@@ -9,6 +9,7 @@ import {
   deleteBooking
 } from "../../components/FetchBookings";
 import { Booking } from "../../types/Bookings";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 
 function DashboardManager() {
   const [venues, setVenues] = useState<Venue[]>([]);
@@ -22,7 +23,7 @@ function DashboardManager() {
     async function fetchVenues() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/profiles/${profileName}/venues?_bookings=true`,
+          `${API_BASE_URL}${ENDPOINTS.PROFILES}/${profileName}/venues?_bookings=true`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -69,17 +70,14 @@ function DashboardManager() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/venues/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          }
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey
         }
-      );
+      });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);

@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Venue from "../types/Venue";
 import BookingForm from "./dashboard/booking/BookingForm";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function VenueDetail() {
   const { id } = useParams<{ id: string }>();
   const [venue, setVenue] = useState<Venue | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("bearerToken");
@@ -15,7 +17,7 @@ function VenueDetail() {
     async function getVenue() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues/${id}?_bookings=true`
+          `${API_BASE_URL}${ENDPOINTS.VENUES}/${id}?_bookings=true`
         );
         const json = await response.json();
         setVenue(json.data as Venue);
@@ -43,7 +45,7 @@ function VenueDetail() {
     guests: number;
   }) => {
     try {
-      const res = await fetch(`https://v2.api.noroff.dev/holidaze/bookings/`, {
+      const res = await fetch(`${API_BASE_URL}${ENDPOINTS.BOOKINGS}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,11 +88,18 @@ function VenueDetail() {
         <p>{venue.price} kr pr night</p>
       </div>
       <div>
-        <p>
-          {venue.description.length > 200
-            ? venue.description.slice(0, 200) + <p>Read more</p>
-            : venue.description}
-        </p>
+        {venue.description.length > 200 ? (
+          <p
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="cursor-pointer max-w-[600px]"
+          >
+            {isExpanded
+              ? venue.description + "  Show less"
+              : venue.description.slice(0, 200) + "...    Read more"}
+          </p>
+        ) : (
+          <p>{venue.description}</p>
+        )}
       </div>
       <div className="border rounded-2xl w-[270px] p-4 flex flex-col gap-4">
         <h2 className="border-b pb-2">Amenities</h2>
