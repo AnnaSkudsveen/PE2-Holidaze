@@ -51,7 +51,7 @@ function SearchBar() {
         onChange={(e) => setSearch(e.target.value)}
         onClick={() => setShowSuggestions(true)}
         placeholder="Search venues..."
-        className="border border-[#50848] rounded  p-2 w-3xs text-sm h-10 bg-white text-black"
+        className="border border-[#508484] rounded  p-2 w-3xs text-sm h-10 bg-white text-black"
       />
 
       {loading && <p>Loading...</p>}
