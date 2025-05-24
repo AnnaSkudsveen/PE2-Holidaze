@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingForm from "./BookingForm";
 import { Booking } from "../../../types/Bookings";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function BookingEdit() {
   const { id } = useParams<{ id: string }>();
@@ -20,7 +21,7 @@ function BookingEdit() {
     async function fetchBooking() {
       try {
         const res = await fetch(
-          `https://v2.api.noroff.dev/holidaze/bookings/${id}?_venue=true`,
+          `${API_BASE_URL}${ENDPOINTS.BOOKINGS}/${id}?_venue=true`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -44,7 +45,7 @@ function BookingEdit() {
     async function fetchVenueBookings() {
       try {
         const res = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues/${booking?.venue.id}?_bookings=true`
+          `${API_BASE_URL}${ENDPOINTS.VENUES}/${booking?.venue.id}?_bookings=true`
         );
         const data = await res.json();
 
@@ -74,23 +75,20 @@ function BookingEdit() {
     if (!booking) return;
 
     try {
-      const res = await fetch(
-        `https://v2.api.noroff.dev/holidaze/bookings/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          },
-          body: JSON.stringify({
-            ...booking,
-            dateFrom,
-            dateTo,
-            guests
-          })
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}${ENDPOINTS.BOOKINGS}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey
+        },
+        body: JSON.stringify({
+          ...booking,
+          dateFrom,
+          dateTo,
+          guests
+        })
+      });
 
       const result = await res.json();
 
@@ -110,13 +108,16 @@ function BookingEdit() {
   if (!booking) return <p>Loading booking...</p>;
 
   return (
-    <BookingForm
-      maxGuests={booking.venue.maxGuests}
-      initialData={booking}
-      onSubmit={handleUpdate}
-      submitButtonText="Update Booking"
-      bookedDates={venueBookings}
-    />
+    <section className="h-svh my-8">
+      <h4 className="text-[24px]">Edit your booking</h4>
+      <BookingForm
+        maxGuests={booking.venue.maxGuests}
+        initialData={booking}
+        onSubmit={handleUpdate}
+        submitButtonText="Update Booking"
+        bookedDates={venueBookings}
+      />
+    </section>
   );
 }
 

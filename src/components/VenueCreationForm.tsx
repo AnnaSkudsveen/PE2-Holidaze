@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function VenueCreationForm({
   onVenueSuccess
@@ -34,43 +35,40 @@ function VenueCreationForm({
     }
 
     try {
-      const response = await fetch(
-        "https://v2.api.noroff.dev/holidaze/venues",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": `${apiKey}`
-          },
-          body: JSON.stringify({
-            name: nameOfVenue,
-            description: descriptionOfVenue,
-            media: [
-              {
-                url: imageUrl,
-                alt: imageAlt
-              }
-            ],
-            price,
-            maxGuests,
-            rating: Number(rating),
-            meta: {
-              wifi,
-              parking,
-              breakfast,
-              pets
-            },
-            location: {
-              address,
-              city,
-              zip,
-              country,
-              continent
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "X-Noroff-API-Key": `${apiKey}`
+        },
+        body: JSON.stringify({
+          name: nameOfVenue,
+          description: descriptionOfVenue,
+          media: [
+            {
+              url: imageUrl,
+              alt: imageAlt
             }
-          })
-        }
-      );
+          ],
+          price,
+          maxGuests,
+          rating: Number(rating),
+          meta: {
+            wifi,
+            parking,
+            breakfast,
+            pets
+          },
+          location: {
+            address,
+            city,
+            zip,
+            country,
+            continent
+          }
+        })
+      });
 
       if (!response.ok) {
         const errorData = await response.json();

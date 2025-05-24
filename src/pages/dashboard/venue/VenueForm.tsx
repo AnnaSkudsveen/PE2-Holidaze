@@ -75,187 +75,213 @@ function VenueForm({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="venueForm flex flex-col  gap-4 items-center w-full mx-auto py-4"
+    >
       <h1>Venue Form</h1>
 
-      <label>
-        Name
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label className="">Name</label>
         <input
           name="name"
           value={venueData.name}
           onChange={handleChange}
           required
+          className="border rounded p-2 "
         />
-      </label>
+      </div>
 
-      <label>
-        Description
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label>Description</label>
         <input
           name="description"
           value={venueData.description}
           onChange={handleChange}
           required
         />
-      </label>
+      </div>
 
-      <label>
-        Image URL
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label>Image URL</label>
         <input
           value={venueData.media[0]?.url || ""}
           onChange={(event) => handleMediaChange(event, "url")}
         />
-      </label>
+      </div>
 
-      <label>
-        Alt text
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label>Alt text</label>
         <input
           value={venueData.media[0]?.alt || ""}
           onChange={(event) => handleMediaChange(event, "alt")}
         />
-      </label>
+      </div>
 
-      <label>
-        Price
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label>Price</label>
         <input
           name="price"
           type="number"
           value={venueData.price}
           onChange={handleChange}
         />
-      </label>
+      </div>
 
-      <label>
-        Max Guests
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <label>Max Guests</label>
         <input
           name="maxGuests"
           type="number"
           value={venueData.maxGuests}
           onChange={handleChange}
         />
-      </label>
+      </div>
 
-      <div>
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
         <label>Rating</label>
-        <div>
-          <label>
+        <div className="flex gap-4 justify-around">
+          <div>
+            <label>1</label>
             <input
               type="radio"
               name="rating"
-              value={1}
+              value="1"
               checked={venueData.rating === 1}
               onChange={handleChange}
             />
-            1
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>2</label>
             <input
               type="radio"
               name="rating"
-              value={2}
+              value="2"
               checked={venueData.rating === 2}
               onChange={handleChange}
             />
-            2
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>3</label>
             <input
               type="radio"
               name="rating"
-              value={3}
+              value="3"
               checked={venueData.rating === 3}
               onChange={handleChange}
             />
-            3
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>4</label>
             <input
               type="radio"
               name="rating"
-              value={4}
+              value="4"
               checked={venueData.rating === 4}
               onChange={handleChange}
             />
-            4
-          </label>
-          <label>
+          </div>
+          <div>
+            <label>5</label>
             <input
               type="radio"
               name="rating"
-              value={5}
+              value="5"
               checked={venueData.rating === 5}
               onChange={handleChange}
             />
-            5
-          </label>
+          </div>
         </div>
       </div>
 
-      <div>
-        <h3>Extras</h3>
-        <label>
-          <input
-            type="checkbox"
-            name="wifi"
-            checked={venueData.meta.wifi}
-            onChange={handleChange}
-          />
-          Wifi
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="parking"
-            checked={venueData.meta.parking}
-            onChange={handleChange}
-          />
-          Parking
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="breakfast"
-            checked={venueData.meta.breakfast}
-            onChange={handleChange}
-          />
-          Breakfast
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="pets"
-            checked={venueData.meta.pets}
-            onChange={handleChange}
-          />
-          Pets
-        </label>
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+        <h3 className="text-left">Extras</h3>
+        <div className="flex  gap-2 w-full max-w-[600px] items-baseline">
+          <div>
+            <label>Wifi</label>
+            <input
+              type="checkbox"
+              name="wifi"
+              checked={venueData.meta.wifi}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label>Parking</label>
+            <input
+              type="checkbox"
+              name="parking"
+              checked={venueData.meta.parking}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label>Breakfast</label>
+            <input
+              type="checkbox"
+              name="breakfast"
+              checked={venueData.meta.breakfast}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label>Pets</label>
+            <input
+              type="checkbox"
+              name="pets"
+              checked={venueData.meta.pets}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
         <h3>Location</h3>
-        <input
-          name="address"
-          placeholder="Address"
-          value={venueData.location.address || ""}
-          onChange={handleChange}
-        />
-        <input
-          name="city"
-          placeholder="City"
-          value={venueData.location.city || ""}
-          onChange={handleChange}
-        />
-        <input
-          name="zip"
-          placeholder="Zip"
-          value={venueData.location.zip || ""}
-          onChange={handleChange}
-        />
-        <input
-          name="country"
-          placeholder="Country"
-          value={venueData.location.country || ""}
-          onChange={handleChange}
-        />
+
+        <div className="flex flex-col gap-4 w-full max-w-[600px] items-baseline">
+          <label htmlFor="address">Address</label>
+          <input
+            name="address"
+            placeholder="Address"
+            value={venueData.location.address || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+          <label htmlFor="city">City</label>
+          <input
+            name="city"
+            placeholder="City"
+            value={venueData.location.city || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+          <label htmlFor="zip">Zip</label>
+          <input
+            name="zip"
+            placeholder="Zip"
+            value={venueData.location.zip || ""}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex flex-col gap-2 w-full max-w-[600px] items-baseline">
+          <label htmlFor="country">Country</label>
+          <input
+            name="country"
+            placeholder="Country"
+            value={venueData.location.country || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <label htmlFor="continent">Continent</label>
         <input
           name="continent"
           placeholder="Continent"
@@ -264,7 +290,12 @@ function VenueForm({
         />
       </div>
 
-      <button type="submit">{submitButtonText}</button>
+      <button
+        className="border rounded h-10 px-3 cursor-pointer hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0"
+        type="submit"
+      >
+        {submitButtonText}
+      </button>
     </form>
   );
 }

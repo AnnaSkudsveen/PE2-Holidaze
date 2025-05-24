@@ -1,6 +1,7 @@
 import VenueForm from "./VenueForm";
 import { useNavigate } from "react-router-dom";
 import { VenueCreation } from "../../../types/VenueCreation";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function VenueCreate() {
   const navigate = useNavigate();
@@ -13,18 +14,15 @@ function VenueCreate() {
 
   async function handleCreate(venue: VenueCreation) {
     try {
-      const response = await fetch(
-        "https://v2.api.noroff.dev/holidaze/venues",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          },
-          body: JSON.stringify(venue)
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey
+        },
+        body: JSON.stringify(venue)
+      });
 
       const data = await response.json();
 

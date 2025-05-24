@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Venue from "../types/Venue";
 import BookingForm from "./dashboard/booking/BookingForm";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 
 function VenueDetail() {
   const { id } = useParams<{ id: string }>();
   const [venue, setVenue] = useState<Venue | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("bearerToken");
@@ -15,7 +17,7 @@ function VenueDetail() {
     async function getVenue() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues/${id}?_bookings=true`
+          `${API_BASE_URL}${ENDPOINTS.VENUES}/${id}?_bookings=true`
         );
         const json = await response.json();
         setVenue(json.data as Venue);
@@ -43,7 +45,7 @@ function VenueDetail() {
     guests: number;
   }) => {
     try {
-      const res = await fetch(`https://v2.api.noroff.dev/holidaze/bookings/`, {
+      const res = await fetch(`${API_BASE_URL}${ENDPOINTS.BOOKINGS}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,50 +76,65 @@ function VenueDetail() {
   };
 
   return (
-    <>
+    <section className="flex flex-col items-center gap-4 overflow-hidden mb-10">
+      <img
+        src={venue.media[0].url}
+        alt=""
+        className="w-full lg:max-w-[1280px] h-[400px] object-cover"
+      />
       <h1>{venue.name}</h1>
-      <div>
+      <div className="flex gap-4">
         <p>{venue.location.city}</p>
         <p>{venue.price} kr pr night</p>
       </div>
       <div>
-        <p>{venue.description}</p>
-        <p>Read more</p>
+        {venue.description.length > 200 ? (
+          <p
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="cursor-pointer max-w-[600px]"
+          >
+            {isExpanded
+              ? venue.description + "  Show less"
+              : venue.description.slice(0, 200) + "...    Read more"}
+          </p>
+        ) : (
+          <p>{venue.description}</p>
+        )}
       </div>
-      <div>
-        <h2>Amenities</h2>
-        <div>
+      <div className="border rounded-2xl w-[270px] p-4 flex flex-col gap-4">
+        <h2 className="border-b pb-2">Amenities</h2>
+        <div className="flex justify-baseline gap-2 items-center">
           <i className="fa-light fa-user-group-simple"></i>
           <p>Guests:</p>
           <p>{venue.maxGuests}</p>
         </div>
         {venue.meta.wifi && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-wifi"></i>
             <p>Wifi</p>
           </div>
         )}
         {venue.meta.parking && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-square-parking"></i>
             <p>Parking</p>
           </div>
         )}
         {venue.meta.breakfast && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-bread-slice-butter"></i>
             <p>Breakfast</p>
           </div>
         )}
         {venue.meta.pets && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-dog"></i>
             <p>Pets allowed</p>
           </div>
         )}
       </div>
-      <div>
-        <h2>Booking</h2>
+      <div className="border rounded-2xl w-[270px] p-4 flex flex-col gap-4">
+        <h2 className="border-b pb-2">Booking</h2>
         <BookingForm
           venueId={venue.id}
           maxGuests={venue.maxGuests}
@@ -126,7 +143,7 @@ function VenueDetail() {
           bookedDates={venue.bookings}
         />
       </div>
-    </>
+    </section>
   );
 }
 

@@ -1,54 +1,101 @@
-# React + TypeScript + Vite
+# Holidaze
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Holidaze is a venue booking platform where users can browse, book, and manage venues. It also includes functionality for venue managers to create and manage their own listings.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### User
 
-## Expanding the ESLint configuration
+- Register and log in using a @stud.noroff.no email
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Browse venues and view details
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Book venues
+
+- Create, update and delete bookings
+
+- View and manage bookings on a user dashboard
+
+### Venue Manager
+
+- Register as a venue manager
+
+- Book venues
+
+- Create, update and delete bookings
+
+- Create, update, and delete venues
+
+- View upcoming bookings for owned venues
+
+- View and manage bookings
+
+- Access a specialized dashboard
+
+## Technologies
+
+- React with TypeScript
+
+- React Router
+
+- Tailwind CSS for styling
+
+- LocalStorage for auth token management
+
+- Figma
+
+## Enviroment Setup
+
+1. Clone the repositary
+
+```Bash
+git clone https://github.com/AnnaSkudsveen/PE2-Holidaze
+cd PE2-Holidaze
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install the dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```Bash
+npm install
 ```
+
+3. Start the dev server
+
+```Bash
+npm run dev
+```
+
+## Requirements
+
+All users:
+
+- [x] May view a list of Venues.
+- [x] May search for a specific Venue.
+- [x] May view a specific Venue page by id.
+- [x] May register as a customer with a stud.noroff.no email address and password.
+- [x] May register as a Venue Manager with a stud.noroff.no email address and password.
+- [x] May view a calendar with available dates for a Venue. Should dates be booked this must be indicated within the calendar.
+
+Customers:
+
+- [x] May login and log out once registered.
+- [x] May create a booking at a Venue.
+- [x] May view their upcoming bookings.
+- [x] May update their avatar/profile picture (a placeholder avatar/profile picture may be provided as a default until the customer updates it).
+
+Venue Managers:
+
+- [x] May login and log out once registered.
+- [x] May create a Venue.
+- [x] May edit/update a Venue they manage.
+- [x] May delete a Venue they manage.
+- [x] May view upcoming bookings made at a Venue they manage.
+- [x] May update their avatar/profile picture (a placeholder avatar/profile picture may be provided as a default until the Venue Manager updates it).
+
+## Improvements
+
+- Currently only supports one image per venue
+
+## Licence
+
+MIT License. This project was built as part of the Noroff Front-End Development curriculum.

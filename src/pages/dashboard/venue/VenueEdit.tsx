@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import VenueForm from "./VenueForm";
 import { VenueCreation } from "../../../types/VenueCreation";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function VenueEdit() {
   const { id } = useParams<{ id: string }>();
@@ -15,7 +16,7 @@ function VenueEdit() {
     async function fetchVenue() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/venues/${id}`
+          `${API_BASE_URL}${ENDPOINTS.VENUES}/${id}`
         );
         const data = await response.json();
         setVenue(data.data);
@@ -34,18 +35,15 @@ function VenueEdit() {
     }
 
     try {
-      const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/venues/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          },
-          body: JSON.stringify(updatedVenue)
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey
+        },
+        body: JSON.stringify(updatedVenue)
+      });
 
       const result = await response.json();
 

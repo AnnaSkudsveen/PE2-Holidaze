@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import VenueCard from "./VenueCard";
-import Venue from "../types/Venue";
+import Venue from "../../types/Venue";
+import { ENDPOINTS, API_BASE_URL } from "../../constants/Api";
 
 function DiplayVenues() {
   const [venues, setVenues] = useState<Venue[]>([]);
@@ -9,9 +10,7 @@ function DiplayVenues() {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const response = await fetch(
-          "https://v2.api.noroff.dev/holidaze/venues"
-        );
+        const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}`);
         if (!response.ok) {
           throw new Error("Failed to fetch venues");
         }

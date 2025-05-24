@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import BookingCard from "../../components/BookingCard";
+import BookingCard from "../../components/booking/BookingCard";
 import { Booking } from "../../types/Bookings";
-import Profile from "../Profile";
+import Profile from "../../components/Profile";
 import {
   fetchUserBookings,
   deleteBooking
-} from "../../components/FetchBookings";
+} from "../../components/booking/FetchBookings";
 
 function DashboardUser() {
   console.log("Dashboard User");
@@ -52,21 +52,38 @@ function DashboardUser() {
   if (error) return <h2>{error}</h2>;
 
   return (
-    <>
-      <h1>Dashboard</h1>
+    <section className="w-full mx-auto flex flex-col items-center mb-10">
       <Profile />
-      <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
+      <h1 className="text-2xl mb-8 text-center">Your bookings</h1>
+
+      <div className="flex flex-wrap justify-center items-center gap-4 max-w-[1200px]">
         {bookings.map((booking) => (
-          <div key={booking.id}>
+          <div
+            key={booking.id}
+            className="bg-white border h-[510px] flex-col rounded-lg p-6 flex items-center"
+          >
+            <img
+              src={booking.venue.media[0].url}
+              alt=""
+              className="h-[200px] w-[400px] object-cover rounded mb-6"
+            />
             <BookingCard booking={booking} />
-            <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
-            <button onClick={() => handleDeleteBooking(booking.id)}>
-              Delete Booking
-            </button>
+
+            <div className=" flex gap-4 justify-between">
+              <div className="border rounded h-10 px-4 flex items-center justify-center cursor-pointer hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0">
+                <Link to={`/BookingEdit/${booking.id}`}>Edit</Link>
+              </div>
+              <button
+                className="border rounded h-10 px-4 w-[100px] cursor-pointer hover:text-white hover:bg-red-700 transition"
+                onClick={() => handleDeleteBooking(booking.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </section>
   );
 }
 

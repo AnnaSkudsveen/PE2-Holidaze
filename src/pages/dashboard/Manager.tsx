@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import VenueCard from "../../components/VenueCard";
+import VenueCard from "../../components/venue/VenueCard";
 import Venue from "../../types/Venue";
-import Profile from "../Profile";
-import BookingCard from "../../components/BookingCard";
+import Profile from "../../components/Profile";
+import BookingCard from "../../components/booking/BookingCard";
 import {
   fetchUserBookings,
   deleteBooking
-} from "../../components/FetchBookings";
+} from "../../components/booking/FetchBookings";
 import { Booking } from "../../types/Bookings";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 
 function DashboardManager() {
   const [venues, setVenues] = useState<Venue[]>([]);
@@ -22,7 +23,7 @@ function DashboardManager() {
     async function fetchVenues() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/profiles/${profileName}/venues?_bookings=true`,
+          `${API_BASE_URL}${ENDPOINTS.PROFILES}/${profileName}/venues?_bookings=true`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -69,17 +70,14 @@ function DashboardManager() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `https://v2.api.noroff.dev/holidaze/venues/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-            "X-Noroff-API-Key": apiKey
-          }
+      const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey
         }
-      );
+      });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
@@ -115,51 +113,90 @@ function DashboardManager() {
     <>
       <Profile />
 
-      <div>
-        <Link to="/VenueCreate">
-          <h2>Create new venue</h2>
-        </Link>
-      </div>
+      <section className="flex flex-wrap gap-20 justify-center ">
+        <div className="flex flex-col gap-4 max-w-[1200px]">
+          <div className="border rounded h-10 px-4 hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0">
+            <Link
+              to="/VenueCreate"
+              className="flex items-center justify-center h-full "
+            >
+              <h2>Create new venue</h2>
+            </Link>
+          </div>
+          {venues.map((venue) => (
+            <div key={venue.id} className="border-b pb-2">
+              <VenueCard venue={venue} />
+              <h3>Upcoming bookings at venue</h3>
+              <div className="flex flex-col gap-4">
+                {venue.bookings?.slice(0, 3).map((booking, index) => (
+                  <div
+                    className="flex flex-col items-baseline"
+                    key={booking.id || index}
+                  >
+                    <p>
+                      {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                      })}{" "}
+                      –{" "}
+                      {new Date(booking.dateTo).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                      })}
+                    </p>
 
-      <section>
-        {venues.map((venue) => (
-          <div key={venue.id}>
-            <VenueCard venue={venue} />
-            {venue.bookings?.slice(0, 3).map((booking, index) => (
-              <div key={booking.id || index}>
-                <p>
-                  {new Date(booking.dateFrom).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                  })}{" "}
-                  –{" "}
-                  {new Date(booking.dateTo).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                  })}
-                </p>
-                <p>Customer: {booking.customer.name}</p>
-                <p>Guests: {booking.guests}</p>
+                    <p>Customer: {booking.customer.name}</p>
+                    <p>Guests: {booking.guests}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-            <Link to={`/VenueEdit/${venue.id}`}>Edit Venue</Link>
-            <button onClick={() => handleDelete(venue.id)}>Delete Venue</button>
-          </div>
-        ))}
+
+              <div className=" flex gap-4 justify-between mt-4">
+                <div className="border rounded h-10 px-4 flex items-center hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0 cursor-pointer">
+                  <Link to={`/VenueEdit/${venue.id}`}>Edit Venue</Link>
+                </div>
+
+                <button
+                  className=" hover:text-white hover:bg-red-700 transition border rounded h-10 px-4  cursor-pointer"
+                  onClick={() => handleDelete(venue.id)}
+                >
+                  Delete Venue
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h2>Your bookings</h2>
+          {bookings.map((booking) => (
+            <div
+              key={booking.id}
+              className="flex flex-col flex-grow items-center border-b justify-between gap-4 mt-4 md:mt-0"
+            >
+              <img
+                src={booking.venue.media[0].url}
+                alt=""
+                className="w-[280px] h-auto md:h-[200px] md:w-auto"
+              />
+              <BookingCard booking={booking} />
+
+              <div className=" flex gap-4 justify-center my-4 ">
+                <div className="border rounded h-10 px-4 flex items-center w-[100px] justify-center hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0 cursor-pointer">
+                  <Link to={`/BookingEdit/${booking.id}`}>Edit</Link>
+                </div>
+                <button
+                  className="border rounded h-10 px-4 w-[100px] cursor-pointer hover:text-white hover:bg-red-700 transition"
+                  onClick={() => handleDeleteBooking(booking.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
-      <div className="flex justify-around flex-wrap gap-8 max-w-[1200px]">
-        {bookings.map((booking) => (
-          <div key={booking.id}>
-            <BookingCard booking={booking} />
-            <Link to={`/BookingEdit/${booking.id}`}>Edit booking</Link>
-            <button onClick={() => handleDeleteBooking(booking.id)}>
-              Delete Booking
-            </button>
-          </div>
-        ))}
-      </div>
     </>
   );
 }
