@@ -1,4 +1,4 @@
-import DiplayVenues from "../components/VenueDetails";
+import DiplayVenues from "../components/venue/VenueDetails";
 import SearchBar from "../components/Search";
 
 function AllVenues() {

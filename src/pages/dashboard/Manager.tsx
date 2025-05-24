@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import VenueCard from "../../components/VenueCard";
+import VenueCard from "../../components/venue/VenueCard";
 import Venue from "../../types/Venue";
-import Profile from "../Profile";
-import BookingCard from "../../components/BookingCard";
+import Profile from "../../components/Profile";
+import BookingCard from "../../components/booking/BookingCard";
 import {
   fetchUserBookings,
   deleteBooking
-} from "../../components/FetchBookings";
+} from "../../components/booking/FetchBookings";
 import { Booking } from "../../types/Bookings";
 import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 

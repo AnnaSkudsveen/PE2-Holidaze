@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import VenueCard from "./VenueCard";
-import Venue from "../types/Venue";
-import { ENDPOINTS, API_BASE_URL } from "../constants/Api";
+import Venue from "../../types/Venue";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 
 function DiplayVenues() {
   const [venues, setVenues] = useState<Venue[]>([]);
@@ -10,7 +10,9 @@ function DiplayVenues() {
   useEffect(() => {
     const fetchVenues = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}${ENDPOINTS.VENUES}`);
+        const response = await fetch(
+          `${API_BASE_URL}${ENDPOINTS.VENUES}?sort=created&sortOrder=desc`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch venues");
         }

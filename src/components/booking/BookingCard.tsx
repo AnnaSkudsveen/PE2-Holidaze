@@ -1,4 +1,4 @@
-import { Booking } from "../types/Bookings";
+import { Booking } from "../../types/Bookings";
 
 type BookingCardProps = {
   booking: Booking;

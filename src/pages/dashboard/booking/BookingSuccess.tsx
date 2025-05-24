@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Booking } from "../../../types/Bookings";
-import BookingCard from "../../../components/BookingCard";
+import BookingCard from "../../../components/booking/BookingCard";
 import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
 
 function BookingSuccess() {

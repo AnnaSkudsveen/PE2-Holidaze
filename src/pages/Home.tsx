@@ -1,7 +1,7 @@
 import Venue from "../types/Venue";
 import HeaderImg from "../../public/header_img.jpg";
 import { useEffect, useState } from "react";
-import VenueCard from "../components/VenueCard";
+import VenueCard from "../components/venue/VenueCard";
 import { Link } from "react-router-dom";
 import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
 

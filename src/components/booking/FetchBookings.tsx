@@ -1,5 +1,5 @@
-import { Booking } from "../types/Bookings";
-import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
+import { Booking } from "../../types/Bookings";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
 
 export async function fetchUserBookings(
   name: string,
