@@ -1,5 +1,5 @@
-import DiplayVenues from "../components/venue/VenueDetails";
-import SearchBar from "../components/Search";
+import DiplayVenues from "../components/venue/VenueDetails.tsx";
+import SearchBar from "../components/Search.tsx";
 
 function AllVenues() {
   console.log("All Venues");

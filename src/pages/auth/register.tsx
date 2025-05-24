@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api.tsx";
 import { useNavigate } from "react-router-dom";
 
 function Register() {

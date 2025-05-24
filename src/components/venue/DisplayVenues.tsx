@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import VenueCard from "./VenueCard";
-import Venue from "../../types/Venue";
-import { ENDPOINTS, API_BASE_URL } from "../../constants/Api";
+import VenueCard from "./VenueCard.tsx";
+import Venue from "../../types/Venue.ts";
+import { ENDPOINTS, API_BASE_URL } from "../../constants/Api.tsx";
 
 function DiplayVenues() {
   const [venues, setVenues] = useState<Venue[]>([]);

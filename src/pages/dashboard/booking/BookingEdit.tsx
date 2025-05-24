@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import BookingForm from "./BookingForm";
-import { Booking } from "../../../types/Bookings";
-import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
+import BookingForm from "./BookingForm.tsx";
+import { Booking } from "../../../types/Bookings.ts";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api.tsx";
 
 function BookingEdit() {
   const { id } = useParams<{ id: string }>();

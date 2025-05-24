@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Profile as ProfileType } from "../types/Profile";
-import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
+import { Profile as ProfileType } from "../types/Profile.ts";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api.tsx";
 
 function Profile() {
   const [profile, setProfile] = useState<ProfileType | null>(null);

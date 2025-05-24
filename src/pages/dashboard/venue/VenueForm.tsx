@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { VenueCreation } from "../../../types/VenueCreation";
+import { VenueCreation } from "../../../types/VenueCreation.ts";
 
 interface Props {
   initialData?: VenueCreation;

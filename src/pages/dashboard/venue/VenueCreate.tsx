@@ -1,7 +1,7 @@
-import VenueForm from "./VenueForm";
+import VenueForm from "./VenueForm.tsx";
 import { useNavigate } from "react-router-dom";
-import { VenueCreation } from "../../../types/VenueCreation";
-import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
+import { VenueCreation } from "../../../types/VenueCreation.ts";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api.tsx";
 
 function VenueCreate() {
   const navigate = useNavigate();

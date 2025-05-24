@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import VenueCard from "../../components/venue/VenueCard";
-import Venue from "../../types/Venue";
-import Profile from "../../components/Profile";
-import BookingCard from "../../components/booking/BookingCard";
+import VenueCard from "../../components/venue/VenueCard.tsx";
+import Venue from "../../types/Venue.ts";
+import Profile from "../../components/Profile.tsx";
+import BookingCard from "../../components/booking/BookingCard.tsx";
 import {
   fetchUserBookings,
   deleteBooking
-} from "../../components/booking/FetchBookings";
-import { Booking } from "../../types/Bookings";
-import { API_BASE_URL, ENDPOINTS } from "../../constants/Api";
+} from "../../components/booking/FetchBookings.tsx";
+import { Booking } from "../../types/Bookings.ts";
+import { API_BASE_URL, ENDPOINTS } from "../../constants/Api.tsx";
 
 function DashboardManager() {
   const [venues, setVenues] = useState<Venue[]>([]);

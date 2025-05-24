@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
-import AllVenues from "./pages/Venues";
-import Venue from "./pages/VenueDetail";
-import DashboardUser from "./pages/dashboard/User";
-import DashboardManager from "./pages/dashboard/Manager";
-import Layout from "./layout/Layout";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import BookingSuccess from "./pages/dashboard/booking/BookingSuccess";
-import VenueCreate from "./pages/dashboard/venue/VenueCreate";
-import VenueEdit from "./pages/dashboard/venue/VenueEdit";
-import BookingEdit from "./pages/dashboard/booking/BookingEdit";
-import ScrollToTop from "./components/ScrollToTop";
+import Home from "./pages/Home.tsx";
+import AllVenues from "./pages/Venues.tsx";
+import Venue from "./pages/VenueDetail.tsx";
+import DashboardUser from "./pages/dashboard/User.tsx";
+import DashboardManager from "./pages/dashboard/Manager.tsx";
+import Layout from "./layout/Layout.tsx";
+import Login from "./pages/auth/Login.tsx";
+import Register from "./pages/auth/Register.tsx";
+import BookingSuccess from "./pages/dashboard/booking/BookingSuccess.tsx";
+import VenueCreate from "./pages/dashboard/venue/VenueCreate.tsx";
+import VenueEdit from "./pages/dashboard/venue/VenueEdit.tsx";
+import BookingEdit from "./pages/dashboard/booking/BookingEdit.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 function App() {
   return (

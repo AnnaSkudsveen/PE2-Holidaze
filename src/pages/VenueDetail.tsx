@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Venue from "../types/Venue";
-import BookingForm from "./dashboard/booking/BookingForm";
-import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
+import Venue from "../types/Venue.ts";
+import BookingForm from "./dashboard/booking/BookingForm.tsx";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api.tsx";
 
 function VenueDetail() {
   const { id } = useParams<{ id: string }>();

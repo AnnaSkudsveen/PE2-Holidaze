@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Venue from "../types/Venue";
-import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
+import Venue from "../types/Venue.ts";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api.tsx";
 
 function SearchBar() {
   const [search, setSearch] = useState("");

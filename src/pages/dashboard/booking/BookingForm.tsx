@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Booking } from "../../../types/Bookings";
+import { Booking } from "../../../types/Bookings.ts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
