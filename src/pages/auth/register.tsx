@@ -43,7 +43,7 @@ function Register() {
       console.log(data.data);
 
       if (response.ok) {
-        navigate("/login");
+        navigate("/Login");
       }
     } catch (error) {
       console.error("Register error:", error);
