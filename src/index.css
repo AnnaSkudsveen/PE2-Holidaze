@@ -66,6 +66,31 @@ nav {
   font-family: "Lato", sans-serif;
 }
 
+/* .venueForm div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+  width: 280px;
+} */
+
+.venueForm div label,
+.profileForm div label {
+  font-size: small;
+}
+
+.venueForm div input,
+.venueForm div select,
+.venueForm div textarea,
+.profileForm div input,
+.profileForm div select,
+.profileForm div textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

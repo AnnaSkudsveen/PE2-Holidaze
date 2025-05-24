@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <>
-      <header className="lg:max-w-[1280px] mx-auto">
+      <header className="lg:max-w-[1280px] mx-auto relative">
         <Link to={venues.length > 0 ? `/Venue/${venues[0].id}` : "/Venues"}>
           <div className="relative">
             <img
@@ -43,7 +43,7 @@ function Home() {
             />
             <div className="absolute inset-0 bg-black/40 z-10" />
           </div>
-          <div className="text-white absolute bottom-2 z-20 pl-10 text-left">
+          <div className="text-white absolute bottom-10 z-20 pl-10 text-left">
             <h1 className="text-xl font-bold max-w-full">
               {venues.length > 0
                 ? window.innerWidth < 400

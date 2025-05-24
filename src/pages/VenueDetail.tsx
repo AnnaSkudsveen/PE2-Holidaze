@@ -74,50 +74,58 @@ function VenueDetail() {
   };
 
   return (
-    <>
+    <section className="flex flex-col items-center gap-4 overflow-hidden mb-10">
+      <img
+        src={venue.media[0].url}
+        alt=""
+        className="w-full lg:max-w-[1280px] h-[400px] object-cover"
+      />
       <h1>{venue.name}</h1>
-      <div>
+      <div className="flex gap-4">
         <p>{venue.location.city}</p>
         <p>{venue.price} kr pr night</p>
       </div>
       <div>
-        <p>{venue.description}</p>
-        <p>Read more</p>
+        <p>
+          {venue.description.length > 200
+            ? venue.description.slice(0, 200) + <p>Read more</p>
+            : venue.description}
+        </p>
       </div>
-      <div>
-        <h2>Amenities</h2>
-        <div>
+      <div className="border rounded-2xl w-[270px] p-4 flex flex-col gap-4">
+        <h2 className="border-b pb-2">Amenities</h2>
+        <div className="flex justify-baseline gap-2 items-center">
           <i className="fa-light fa-user-group-simple"></i>
           <p>Guests:</p>
           <p>{venue.maxGuests}</p>
         </div>
         {venue.meta.wifi && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-wifi"></i>
             <p>Wifi</p>
           </div>
         )}
         {venue.meta.parking && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-square-parking"></i>
             <p>Parking</p>
           </div>
         )}
         {venue.meta.breakfast && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-bread-slice-butter"></i>
             <p>Breakfast</p>
           </div>
         )}
         {venue.meta.pets && (
-          <div>
+          <div className="flex justify-baseline gap-2 items-center">
             <i className="fa-light fa-dog"></i>
             <p>Pets allowed</p>
           </div>
         )}
       </div>
-      <div>
-        <h2>Booking</h2>
+      <div className="border rounded-2xl w-[270px] p-4 flex flex-col gap-4">
+        <h2 className="border-b pb-2">Booking</h2>
         <BookingForm
           venueId={venue.id}
           maxGuests={venue.maxGuests}
@@ -126,7 +134,7 @@ function VenueDetail() {
           bookedDates={venue.bookings}
         />
       </div>
-    </>
+    </section>
   );
 }
 

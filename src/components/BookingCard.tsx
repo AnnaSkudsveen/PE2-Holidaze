@@ -6,7 +6,7 @@ type BookingCardProps = {
 
 function BookingCard({ booking }: BookingCardProps) {
   return (
-    <>
+    <div className="border-t p-2  flex flex-col gap-2 items-start">
       <p>
         <strong>Booking ID:</strong> {booking.id}
       </p>
@@ -25,7 +25,7 @@ function BookingCard({ booking }: BookingCardProps) {
       <p>
         <strong>To:</strong> {new Date(booking.dateTo).toLocaleDateString()}
       </p>
-    </>
+    </div>
   );
 }
 

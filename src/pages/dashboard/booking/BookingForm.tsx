@@ -64,9 +64,9 @@ const BookingForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="dateFrom">From:</label>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col items-baseline">
+        <label htmlFor="dateFrom">From</label>
         <DatePicker
           selected={dateFrom ? new Date(dateFrom) : null}
           onChange={(date: Date | null) => {
@@ -82,11 +82,12 @@ const BookingForm = ({
           filterDate={(date: Date) => !isDateDisabled(date)}
           id="dateFrom"
           required
+          className="border rounded h-10 pl-2"
         />
       </div>
 
-      <div>
-        <label htmlFor="dateTo">To:</label>
+      <div className="flex flex-col items-baseline">
+        <label htmlFor="dateTo">To</label>
         <DatePicker
           selected={dateTo ? new Date(dateTo) : null}
           onChange={(date: Date | null) => {
@@ -103,12 +104,14 @@ const BookingForm = ({
           filterDate={(date: Date) => !isDateDisabled(date)}
           required
           id="dateTo"
+          className="border rounded h-10 pl-2"
         />
       </div>
-      <div>
-        <label htmlFor="guests">Guests:</label>
+      <div className="flex gap-4 items-center">
+        <label htmlFor="guests">Guests</label>
         <select
           id="guests"
+          className="border rounded h-10 px-2"
           value={guests}
           onChange={(e) => setGuests(Number(e.target.value))}
         >
@@ -119,7 +122,12 @@ const BookingForm = ({
           ))}
         </select>
       </div>
-      <button type="submit">{submitButtonText}</button>
+      <button
+        className="border border-[#508484] focus:bg-[#DEEFEF] hover:bg-[#DEEFEF] focus:text-white hover:text-white focus:border-0 hover:border-0 rounded h-10 px-4 text-[#508484] transition-colors duration-300"
+        type="submit"
+      >
+        {submitButtonText}
+      </button>
     </form>
   );
 };

@@ -131,15 +131,18 @@ function Profile() {
 
             <button
               onClick={() => setIsEditing(true)}
-              className="border rounded py-1 px-3 hover:text-[#508484] mb-4"
+              className="border rounded py-1 px-3 hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-[#508484] hover:border-[#508484] mb-4  cursor-pointer"
             >
               Edit Profile
             </button>
           </div>
         </section>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form
+          onSubmit={handleSubmit}
+          className="profileForm w-[280px] d:max-w-[600px]"
+        >
+          <div className="flex flex-col  w-full  items-baseline">
             <label htmlFor="bio">Bio:</label>
             <textarea
               id="bio"
@@ -148,7 +151,7 @@ function Profile() {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col  w-full max-w-[600px] items-baseline">
             <label>Avatar URL:</label>
             <input
               type="url"
@@ -163,7 +166,7 @@ function Profile() {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col  w-full max-w-[600px] items-baseline">
             <label>Banner URL:</label>
             <input
               type="url"
@@ -178,21 +181,31 @@ function Profile() {
             />
           </div>
 
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                checked={venueManager}
-                onChange={(e) => setVenueManager(e.target.checked)}
-              />{" "}
-              Venue Manager
-            </label>
+          <div className="flex w-full items-center max-w-[600px] justify-between">
+            <label>Venue Manager</label>
+            <input
+              className="cursor-pointer w-2"
+              type="checkbox"
+              checked={venueManager}
+              onChange={(e) => setVenueManager(e.target.checked)}
+            />
           </div>
 
-          <button type="submit">Save</button>
-          <button type="button" onClick={() => setIsEditing(false)}>
-            Cancel
-          </button>
+          <div className="flex gap-4 justify-around my-4">
+            <button
+              type="submit"
+              className="border rounded h-10 px-3 cursor-pointer hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              className="border rounded h-10 px-3 cursor-pointer hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0"
+              onClick={() => setIsEditing(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       )}
     </div>

@@ -43,14 +43,14 @@ function SearchBar() {
   }, [delayedSearch]);
 
   return (
-    <div className="SearchBar flex items-center justify-between">
+    <div className="SearchBar flex flex-col items-center gap-4">
       <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onClick={() => setShowSuggestions(true)}
         placeholder="Search venues..."
-        className=" rounded p-2 w-3xs text-sm h-10 bg-white text-black"
+        className="border border-[#50848] rounded  p-2 w-3xs text-sm h-10 bg-white text-black"
       />
 
       {loading && <p>Loading...</p>}
@@ -62,19 +62,24 @@ function SearchBar() {
         delayedSearch &&
         suggestions.length > 0 &&
         showSuggestions && (
-          <div className="bg-white text-[#508484]">
-            <button onClick={() => setShowSuggestions(false)}>Close</button>
+          <div className="bg-white text-[#508484] w-3xs md:w-[600px] flex flex-col gap-2 p-4 rounded shadow-lg max-h-[400px] overflow-y-auto">
+            <button
+              className="cursor-pointer border-b pb-2"
+              onClick={() => setShowSuggestions(false)}
+            >
+              Close search
+            </button>
             {suggestions.map((venue) => (
               <div key={venue.id}>
                 <Link
                   to={`/venue/${venue.id}`}
                   onClick={() => setShowSuggestions(false)}
                 >
-                  <div className="SearchBarLink">
+                  <div className="SearchBarLink flex justify-baseline gap-4">
                     <img
-                      className="searchImg"
                       src={venue.media?.[0]?.url}
                       alt={venue.name}
+                      className="w-16 h-16 object-cover rounded"
                     />
                     <h2>{venue.name}</h2>
                   </div>

@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import Venue from "../types/Venue";
 import { Booking } from "../../../types/Bookings";
 import BookingCard from "../../../components/BookingCard";
 
@@ -14,7 +13,7 @@ function BookingSuccess() {
     async function fetchBooking() {
       try {
         const response = await fetch(
-          `https://v2.api.noroff.dev/holidaze/bookings/${id}?_venue`,
+          `https://v2.api.noroff.dev/holidaze/bookings/${id}?_venue=true`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -50,10 +49,15 @@ function BookingSuccess() {
   }
 
   return (
-    <>
+    <section className="flex flex-col items-center justify-center p-4">
       <h1>Booking Confirmed!</h1>
+      <img
+        src={booking.venue?.media[0].url}
+        alt=""
+        className="rounded-lg my-4"
+      />
       <BookingCard booking={booking} />
-    </>
+    </section>
   );
 }
 

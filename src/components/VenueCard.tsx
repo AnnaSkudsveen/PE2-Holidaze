@@ -35,21 +35,18 @@ function VenueCard({ venue }: IVenueCardProps) {
     >
       {imageContent}
       <div className="flex justify-between w-full">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start gap-2">
           <p className="h-3">{venueName}</p>
           <p>
             {venue.location.country?.length > 20
               ? venue.location.country.slice(0, 20) + "..."
-              : ""}
+              : venue.location.country}
           </p>
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-end gap-2">
           <p className="h-3">{venue.price}kr </p>
           <p>pr night</p>
         </div>
-
-        {/* <p>Max Guests: {venue.maxGuests}</p>
-      <p>Rating: {venue.rating}</p> */}
       </div>
     </Link>
   );

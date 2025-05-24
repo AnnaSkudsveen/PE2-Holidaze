@@ -7,7 +7,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
     const url = `${API_BASE_URL}${ENDPOINTS.LOGIN}`;
 
     try {
@@ -47,25 +48,42 @@ function Login() {
   };
 
   return (
-    <div>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        placeholder="example@stud.noroff.no"
-      />
+    <form className="h-svh flex flex-col items-center gap-4 w-[300px] md:w-auto md:max-w-[600px] mx-auto mt-10">
+      <h1 className="text-[#508484]">Holidaze</h1>
+      <div className="flex items-baseline flex-col gap-2 w-full">
+        <label className="text-xs " htmlFor="email">
+          Email
+        </label>
+        <input
+          id="email"
+          value={email}
+          className="border rounded h-10 px-3 w-full focus:outline-none focus:border-[#508484]"
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="example@stud.noroff.no"
+        />
+      </div>
 
-      <label htmlFor=""></label>
-      <input
-        id="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        placeholder="Password"
-        type="password"
-      />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+      <div className="flex items-baseline flex-col gap-2 w-full">
+        <label className="text-xs" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          value={password}
+          className="border rounded h-10 px-3 w-full focus:outline-none focus:border-[#508484]"
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Password"
+          type="password"
+        />
+      </div>
+
+      <button
+        className="border rounded h-10 px-3 cursor-pointer hover:bg-[#508484] hover:text-white transform transition-colors duration-300 focus:bg-[#508484] focus:text-white focus:border-0 hover:border-0"
+        onClick={handleLogin}
+      >
+        Login
+      </button>
+    </form>
   );
 }
 
