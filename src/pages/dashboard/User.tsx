@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import BookingCard from "../../components/booking/BookingCard";
-import { Booking } from "../../types/Bookings";
-import Profile from "../../components/Profile";
+import BookingCard from "../../components/booking/BookingCard.tsx";
+import { Booking } from "../../types/Bookings.ts";
+import Profile from "../../components/Profile.tsx";
 import {
   fetchUserBookings,
   deleteBooking
-} from "../../components/booking/FetchBookings";
+} from "../../components/booking/FetchBookings.tsx";
 
 function DashboardUser() {
   console.log("Dashboard User");

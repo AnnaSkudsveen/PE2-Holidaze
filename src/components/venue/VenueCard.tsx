@@ -1,4 +1,4 @@
-import Venue from "../../types/Venue";
+import Venue from "../../types/Venue.ts";
 import { Link } from "react-router-dom";
 
 interface IVenueCardProps {

@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import handleLogout from "../components/Logout";
+import handleLogout from "../components/Logout.tsx";
 
 function Navbar() {
   const token = localStorage.getItem("bearerToken");

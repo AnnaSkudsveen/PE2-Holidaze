@@ -1,9 +1,9 @@
-import Venue from "../types/Venue";
+import Venue from "../types/Venue.ts";
 import HeaderImg from "../../public/header_img.jpg";
 import { useEffect, useState } from "react";
-import VenueCard from "../components/venue/VenueCard";
+import VenueCard from "../components/venue/VenueCard.tsx";
 import { Link } from "react-router-dom";
-import { API_BASE_URL, ENDPOINTS } from "../constants/Api";
+import { API_BASE_URL, ENDPOINTS } from "../constants/Api.tsx";
 
 function Home() {
   console.log("Homepage");

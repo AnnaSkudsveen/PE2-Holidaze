@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import VenueForm from "./VenueForm";
-import { VenueCreation } from "../../../types/VenueCreation";
-import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
+import VenueForm from "./VenueForm.tsx";
+import { VenueCreation } from "../../../types/VenueCreation.ts";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api.tsx";
 
 function VenueEdit() {
   const { id } = useParams<{ id: string }>();

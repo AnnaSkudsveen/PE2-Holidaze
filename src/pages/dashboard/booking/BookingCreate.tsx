@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import BookingForm from "./BookingForm";
-import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api";
+import BookingForm from "./BookingForm.tsx";
+import { API_BASE_URL, ENDPOINTS } from "../../../constants/Api.tsx";
 
 function BookingCreate() {
   const { venueId } = useParams<{ venueId: string }>();
