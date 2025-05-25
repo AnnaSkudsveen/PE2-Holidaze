@@ -26,7 +26,11 @@ function Navbar() {
         </Link>
 
         <div className="lg:hidden" onClick={toggleMenu}>
-          {isOpen ? <p>X</p> : <i className="fa-light fa-bars"></i>}
+          {isOpen ? (
+            <p className="cursor-pointer">X</p>
+          ) : (
+            <i className="fa-light fa-bars"></i>
+          )}
         </div>
 
         <div className="hidden lg:flex items-center gap-4">

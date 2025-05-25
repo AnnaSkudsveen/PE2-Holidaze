@@ -1,6 +1,7 @@
 export function handleLogout() {
   localStorage.removeItem("bearerToken");
-  localStorage.removeItem("author");
+  localStorage.removeItem("name");
+  localStorage.removeItem("venueManager");
   location.replace("/");
 }
 
