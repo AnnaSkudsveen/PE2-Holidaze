@@ -37,26 +37,10 @@ h6 {
   font-weight: 400;
   font-style: normal;
 }
-
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-} */
 nav button:hover {
   color: #deefef;
   cursor: pointer;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
 nav {
   text-decoration: none;
@@ -65,14 +49,6 @@ nav {
   font-size: 1rem;
   font-family: "Lato", sans-serif;
 }
-
-/* .venueForm div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  align-items: flex-start;
-  width: 280px;
-} */
 
 .venueForm div label,
 .profileForm div label {
@@ -99,7 +75,4 @@ nav {
   nav a:hover {
     color: #deefef;
   }
-  /* button {
-    background-color: #f9f9f9;
-  } */
 }

@@ -15,7 +15,7 @@ function Footer() {
           FAQ
         </Link>
       </div>
-      <div className="text-[10px] flex flex-col md:flex-row gap-4 pt-8 bottom-1 relative">
+      <div className="text-[10px] flex flex-col md:flex-row gap-4 pt-8 bottom-2 relative">
         <div className="flex gap-8">
           <p>Terms and Conditions</p>
           <p>Privacy Policy</p>
