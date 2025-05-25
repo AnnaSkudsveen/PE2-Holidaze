@@ -2,6 +2,10 @@
 
 Holidaze is a venue booking platform where users can browse, book, and manage venues. It also includes functionality for venue managers to create and manage their own listings.
 
+[Deployed on Netlify](https://holidaze-as.netlify.app/)
+[Figma](https://www.figma.com/design/qro0mYvXWzb2EZL9V0HKxE/Holidaze?node-id=39-166&p=f&t=pG7TxYyICgQGKWpe-0)
+
+
 ## Features
 
 ### User
@@ -46,7 +50,7 @@ Holidaze is a venue booking platform where users can browse, book, and manage ve
 
 ## Enviroment Setup
 
-1. Clone the repositary
+1. Clone the repository
 
 ```Bash
 git clone https://github.com/AnnaSkudsveen/PE2-Holidaze
@@ -64,6 +68,12 @@ npm install
 ```Bash
 npm run dev
 ```
+
+### Environment Variables
+Create a .env file in the root of your project:
+````Bash
+VITE_X_NOROFF_API_KEY=your-api-key-here
+````
 
 ## Requirements
 
